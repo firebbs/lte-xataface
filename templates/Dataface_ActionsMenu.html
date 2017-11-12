@@ -1,0 +1,133 @@
+{*-------------------------------------------------------------------------------
+ * Dataface Web Application Framework
+ * Copyright (C) 2005-2006  Steve Hannah (shannah@sfu.ca)
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *-------------------------------------------------------------------------------
+ *}
+{define_slot name="actions_menu"}
+{if $actions|@count > 0}
+<ul {if $class}class="{$class|escape}"{/if} {if $id}id="{$id|escape}"{/if}>
+	{block name="actions_menu_head"}
+{foreach item=action from=$actions key=name}
+            {if $action.subcategory and !$action.subactions}
+            	<!-- Omit action because it has no subactions -->
+            {else}
+              <li id="{$id_prefix}{$action.id}"
+              	  class="
+              	  {if $action.name==$selected_action or $action.selected}selected active{$action.class|escape}{else}plain {$action.class|escape}{/if}
+              	  {if $action.subactions}xf-dropdown dropdown{/if}"
+              	  {foreach from=$action.atts item=actionAttValue key=actionAttName}{$actionAttName|escape}="{$actionAttValue|escape}" {/foreach}
+              	   category="{$action.category}">
+                
+                <a {if $action.subactions}class="trigger dropdown-toggle" data-toggle="dropdown"{/if} id="{$id_prefix}{$action.id|escape}-link" href="{$action.url|escape}" {if $action.onclick} onclick="{$action.onclick|escape}"{/if}{if $action.target} target="{$action.target|escape}"{/if}
+                   accesskey="{$action.accessKey|escape}" title="{$action.description|escape}" data-xf-permission="{$action.permission|escape}"
+                   {if $action.confirm}data-xf-confirm-message="{$action.confirm|escape}"{/if}
+                   >
+                   {if $action.icon}<img id="{$id_prefix}{$action.id}-icon" src="{$action.icon|escape}" alt="{$action.label|escape}"/>{/if}
+                   <i class="fa {if $action.fa_icon}{$action.fa_icon}{/if}
+                   {if !$action.fa_icon && !$action.icon && $action.label}
+                   		
+						{if $action.category=='top_left_menu_bar'}
+
+							{assign var='icon_name' value=$action.name|replace:'top_left_menu_actions_':''}
+							{if $ENV.APPLICATION._icons[$icon_name]}
+								{$ENV.APPLICATION._icons[$icon_name]}
+							{else}
+								fa-list-alt
+							{/if}
+						{elseif $action.category=='top_right_menu_bar'}fa-gears
+						{elseif $action.id=='cancel_new_record_form' || $action.id=='cancel_add_new_related_record'}fa-close
+						{elseif $action.id=='save_new_record_form' || $action.id=='save_add_new_related_record'}fa-save
+						{elseif $action.id=='add_new_related_record_g2'}fa-plus
+						{elseif $action.id=='copy_related'}fa-copy
+						{elseif $action.id=='update_related' || $action.id=='update_record'}fa-refresh
+						{elseif $action.id=='edit_related' || $action.id=='edit_record'}fa-edit
+						{elseif $action.id=='remove_related'}fa-trash
+						{elseif $action.id=='search_related'}fa-filter
+						{elseif $action.id=='export_related' || $action.id=='export_record' || $action.id=='export_list' }fa-file-text-o
+						{elseif $action.id=='view_menu'}fa-th-list
+			
+						{elseif $action.id=='add_new_related_record_g2'}fa-plus
+						
+						{elseif $action.category=='edit_record_form_actions'}fa-caret-right
+						{elseif $action.category==''}fa-list-alt
+						{elseif $action.category=='record_tabs'}fa-id-card-o
+
+						{/if}
+						
+					{/if}"></i>
+                   <span class="action-label {if $action.id =='edit_related_record'}btn btn-primary{/if}" action_id="{$action.id}">{$action.label|escape}</span>
+                   {if $action.subactions}<span class="caret"></span>{/if}
+                  
+                </a>
+                 {if $action.subactions}
+											
+					<ul class="action-sub-menu dropdown-menu" role="menu">
+						{foreach from=$action.subactions item=subaction key=subname}
+							<li id="{$id_prefix}{$subaction.id}"
+							  class="
+							  {if $subaction.name==$selected_action or $subaction.selected}selected {$subaction.class|escape}{else}plain {$subaction.class|escape}{/if}
+							  {if $subaction.subactions}xf-dropdown{/if}"
+							  {foreach from=$subaction.atts item=subactionAttValue key=subactionAttName}{$subactionAttName|escape}="{$subactionAttValue|escape}" {/foreach}
+							  >
+								<a class="{if $subaction.subactions}trigger horizontal-trigger{/if}" id="{$id_prefix}{$subaction.id|escape}-link" href="{$subaction.url|escape}"{if $subaction.onclick} onclick="{$subaction.onclick|escape}"{/if}{if $subaction.target} target="{$subaction.target|escape}"{/if}
+								   accesskey="{$subaction.accessKey|escape}" title="{$subaction.description|escape}" data-xf-permission="{$subaction.permission|escape}"
+								   {if $subaction.confirm}data-xf-confirm-message="{$subaction.confirm|escape}"{/if}
+								   >
+								   {if $subaction.icon}<img id="{$id_prefix}{$subaction.id}-icon" src="{$subaction.icon|escape}" alt="{$subaction.label|escape}"/>{/if}
+								   <span class="action-label">{$subaction.label|escape}</span>
+								   
+								</a>
+								
+								{if $subaction.subactions}
+									<ul class="action-sub-sub-menu">
+										{foreach from=$subaction.subactions item=subsubaction key=subsubname}
+											<li id="{$id_prefix}{$subsubaction.id|escape}-link" 
+												 class="{if $subsubaction.name==$selected_action or $subsubaction.selected}selected {$subsubaction.class|escape}{else}plain {$subsubaction.class|escape}{/if}"
+												 {foreach from=$subsubaction.atts item=subsubactionAttValue key=subsubactionAttName}{$subsubactionAttName|escape}="{$subsubactionAttValue|escape}" {/foreach}
+												 >
+												<a id="{$id_prefix}{$subsubaction.id|escape}-link" href="{$subsubaction.url|escape}"{if $subsubaction.onclick} onclick="{$subsubaction.onclick|escape}"{/if}{if $subsubaction.target} target="{$subsubaction.target|escape}"{/if}
+												   accesskey="{$subsubaction.accessKey|escape}" title="{$subsubaction.description|escape}" data-xf-permission="{$subsubaction.permission|escape}"
+												   {if $subsubaction.confirm}data-xf-confirm-message="{$subsubaction.confirm|escape}"{/if}
+												   >
+												   {if $subsubaction.icon}<img id="{$id_prefix}{$subsubaction.id}-icon" src="{$subsubaction.icon|escape}" alt="{$subsubaction.label|escape}"/>{/if}
+												   <span class="action-label">{$subsubaction.label|escape}</span>
+												   
+												</a>
+											</li>
+										{/foreach}
+									
+									</ul>
+								
+								{/if}
+							
+						  </li>
+						
+						{/foreach}
+					</ul>
+
+			   {/if}
+                
+              </li>
+            {/if}
+            
+            
+{/foreach}
+            
+     {block name="actions_menu_tail"}       
+</ul>
+{/if}
+{/define_slot}

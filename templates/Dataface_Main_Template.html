@@ -1,0 +1,419 @@
+{if $smarty.get.load_ajax != 1}<!doctype html> 
+{define_slot name="html_tag"}
+<html lang="{$ENV.language|escape}">
+{/define_slot}
+
+<head>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/bootstrap/dist/css/bootstrap.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/css/xataface.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/dist/css/skins/_all-skins.min.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/morris.js/morris.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/jvectormap/jquery-jvectormap.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/js/custom.js"></script>
+    {if !$ENV.prefs.no_history} 
+    	{php} $app =& Dataface_Application::getInstance(); $_SESSION['--redirect'] = $app->url(''); {/php} 
+    {/if} 
+    {define_slot name="html_head"}
+	    <meta http-equiv="Content-Type" content="text/html; charset={$ENV.APPLICATION.oe}" />
+	    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	    <title>{define_slot name="html_title"}{$ENV.APPLICATION_OBJECT->getPageTitle()|escape}{/define_slot}</title>
+	    {define_slot name="custom_stylesheets"}
+		    <!-- Stylesheets go here -->
+		{/define_slot} 
+		{block name="custom_stylesheets2"}
+		{define_slot name="dataface_javascripts"}
+		    <script type="text/javascript" language="javascript">
+		    DATAFACE_URL = '{$ENV.DATAFACE_URL}';
+		    DATAFACE_SITE_URL = '{$ENV.DATAFACE_SITE_URL}';
+		    DATAFACE_SITE_HREF = '{$ENV.DATAFACE_SITE_HREF}';
+		    </script>
+		    <script src="{$G2->getBaseURL()}/js/xataface-global.js"></script>
+	    {/define_slot} 
+		    {foreach from=$ENV.APPLICATION_OBJECT->headContent item=headContent} 
+		    	{if !$headContent|strstr:"xataface-global.css" && !$headContent|strstr:"jquery-ui.min.js" } 
+		    		{$headContent}
+		    	{/if} 
+		    {/foreach} 
+	    {define_slot name="custom_javascripts"}
+	    <!-- custom javascripts can go in slot "custom_javascripts" -->
+	    {/define_slot} 
+	    {define_slot name="head_slot"}
+	    	<!-- Place any other items in the head of the document by filling the "head_slot" slot -->
+	    {/define_slot} 
+	    {include file="head_slot.html"} 
+	    {block name="head"} 
+    {/define_slot}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+
+<body class="hold-transition skin-blue {if $smarty.get.iframe == 1 || $smarty.get.load_ajax == 1}layout-top-nav{else}sidebar-mini{/if}" onload="bodyOnload()" {block name="body_atts" }>
+{/if}
+{define_slot name="html_body"}
+    <div class="wrapper">
+        <link rel="alternate" href="{$ENV.APPLICATION_OBJECT->url('-action=feed&--format=RSS2.0')|escape}" title="RSS 2.0" type="application/rss+xml" /> {block name="before_body"}
+
+        <!-- Replace the entire HTML Body with the "html_body" slot -->
+        {if $smarty.get.iframe != 1 && $smarty.get.load_ajax != 1}
+	        <header class="main-header" id="top-section">
+	            {block name="before_header"} 
+	            {define_slot name="global_header"}
+	            	{include file="global_header.html"}
+	            {/define_slot} 
+	            {block name="after_header"}
+	            <!-- Logo -->
+	            <a href="{$ENV.DATAFACE_SITE_URL}" class="logo">
+	                <!-- mini logo for sidebar mini 50x50 pixels -->
+	                <span class="logo-mini"></span>
+	                <!-- logo for regular state and mobile devices -->
+	                <span class="logo-lg"></span>
+	            </a>
+	            <!-- Header Navbar: style can be found in header.less -->
+	            <nav class="navbar navbar-static-top" id="top-menu-bar">
+	                <!-- Sidebar toggle button-->
+	                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+				    	<span class="sr-only">Toggle navigation</span>
+				    </a>
+	                <div class="navbar-collapse pull-left" id="navbar-collapse">
+	                    <div class="navbar-custom-menu">
+	                        {actions_menu category=top_left_menu_bar class="nav navbar-nav" maxcount=$G2->get_property('top_left_menu_bar.size', 7)}
+	                    </div>
+	                </div>
+	                <div class="navbar-collapse " id="top-right-menu-bar">
+	                    <div class="navbar-custom-menu">
+	                        {actions_menu category=top_right_menu_bar class="nav navbar-nav pull-right" maxcount=$G2->get_property('top_right_menu_bar.size', 4) }
+
+	                        {if !$ENV.prefs.hide_language_selector} {block name="before_language_selector"} 
+				            	{define_slot name="language_selector"}
+				            		<div id="language_selector">{language_selector autosubmit="true" type="ul" use_flags=false}</div>
+				            	{/define_slot} 
+				            	{block name="after_language_selector"} 
+				            {/if}
+	                    </div>
+	                </div>
+	            </nav>
+	        </header>
+	        <div id="left_column">
+	        <aside class="main-sidebar" >
+	            <!-- sidebar: style can be found in sidebar.less -->
+	            <section class="sidebar">
+	                <!-- Sidebar user panel -->
+	                <!-- /.search form -->
+	                <!-- sidebar menu: : style can be found in sidebar.less -->
+	                {* actions_menu category=top_left_menu_bar class=sidebar-menu maxcount=$G2->get_property('top_left_menu_bar.size', 7) *} {block name="before_xf_logo"} 
+	                {define_slot name="xf_logo"}
+	                	<div id="xf-logo"><span>Xataface</span></div>
+	                {/define_slot} 
+	                {block name="after_xf_logo"} {block name="before_left_column"} 
+	                {define_slot name="left_column"} {block name="before_table_actions"} 
+		                {define_slot name="table_actions"}
+			                <div id="xf-table-actions">
+			                    {actions_menu id="table_actions" id_prefix="table-actions-" class="tableActions sidebar-menu tree" category="table_actions"}
+			                </div>
+		                {/define_slot} 
+		                {block name="after_table_actions"} {block name="before_table_quicklinks"} 
+		                {define_slot name="table_quicklinks"}
+		                	<div id="xf-table-quicklinks">
+		                    	{actions_menu id="table_quicklinks" id_prefix="table-quicklinks-" class="tableQuicklinks sidebar-menu tree" category="table_quicklinks"}
+		                	</div>
+		            	{/define_slot} 
+		            	{block name="after_table_quicklinks"} 
+		            	{block name="before_application_menu"} 
+		            	{define_slot name="application_menu"}
+		            		{include file="Dataface_Application_Menu.html"}
+		            	{/define_slot} 
+		            	{block name="after_application_menu"} 
+		            {/define_slot}
+	                <!-- left_column-->
+	                {block name="after_left_column"} 
+	                {if $ENV.prefs.show_tables_menu} {* RECORD MENU *} 
+	                	{if $record} 
+	                		{block name="after_record_actions"} 
+	                		{if $record->_table->relationships()|@count>0} 
+	                			{define_slot name="record_search"} 
+	                				{if !$ENV.prefs.hide_record_search}
+						                <div id="record-search">
+						                    {* <img src="{$ENV.DATAFACE_SITE_URL}/images/search_icon.gif" /> *}
+						                    <input type="text" size="15" name="--subsearch" id="--subsearch" value="{$ENV.APPLICATION_OBJECT->getQueryParam('-subsearch')|escape}" onchange="doSubSearch();" /> {literal}
+						                    <script language="javascript">
+						                    <!--
+
+						                    function doSubSearch()
+						                    {
+						                        var qstr = window.location.search;
+						                        var fld = document.getElementById('--subsearch');
+						                        if (fld.value)
+						                        {
+						                            if (qstr.indexOf('?--subsearch=') >= 0 || qstr.indexOf('&--subsearch=') >= 0)
+						                            {
+						                                qstr = qstr.replace(/([?&])--subsearch=([^&]*)/, '$1--subsearch=' + escape(fld.value));
+
+
+						                            }
+						                            else
+						                            {
+						                                qstr += '&--subsearch=' + escape(fld.value);
+						                            }
+
+						                            if (qstr.indexOf('?-action=') >= 0 || qstr.indexOf('&-action=') >= 0)
+						                            {
+						                                qstr = qstr.replace(/([?&])-action=([^&]*)/, '$1-action=single_record_search');
+						                            }
+						                            else
+						                            {
+						                                qstr += '&-action=single_record_search';
+						                            }
+
+						                            window.location.search = qstr;
+						                        }
+						                        return false;
+						                    }
+
+						                    //-->
+						                    </script>
+						                    {/literal}
+						                    <input type="button" value="Search" onclick="doSubSearch();" />
+						                </div>
+	                				{/if} 
+	                			{/define_slot} 
+	                			{if $ENV.prefs.show_record_tree} 
+	                				{block name="before_record_tree"} 
+	            					{load_record var="record"} 
+	            					{include file="RecordNavMenu.html" record=$record} 
+	            					{block name="after_record_tree"} 
+	                			{/if} 
+	                		{/if} 
+	                		{foreach from=$rv->sections item=section} 
+		                		{if $section.class == 'left'} 
+		                			{collapsible_sidebar heading=$section.label see_all=$section.url edit_url=$section.edit_url movable=1 id=$section.name prefix="leftsidebar" oncollapse="DatafaceSections.oncollapse(this)" onexpand="DatafaceSections.onexpand(this)" display=$section.display} 
+		                				{define_slot name="`$section.name`_section_content"} 
+			                				{if $section.content}
+								                <div class="dataface-view-section">
+								                    {$section.content}
+								                </div>
+			                				{elseif $section.fields}
+								                <table class="record-view-table table">
+								                    <tbody>
+								                        {foreach from=$section.fields item=field key=fieldname} 
+									                        {if $field.visibility.browse != 'hidden' and $record->htmlValue($field.name)}
+										                        <tr>
+										                            <th class="record-view-label">{$field.widget.label}</th>
+										                            <td class="record-view-value">{$record->htmlValue($field.name)}</td>
+										                        </tr>
+									                        {/if} 
+								                        {/foreach}
+								                    </tbody>
+								                </table>
+			                				{elseif $section.records} 
+			                					{glance_list records=$section.records} 
+			                				{/if} 
+			                			{/define_slot}
+			                		{/collapsible_sidebar}
+			                	{/if}
+		                	{/foreach} 
+		                {/if}
+		                <div id="top-left-menu-bar">
+		                </div>
+		                <div style="clear:both; height: 1px;"></div>
+		            {/if}
+	            </section>
+	            <!-- /.sidebar -->
+	            {* iframe *}
+	        </aside>
+	        </div>
+    	{/if}
+
+        {block name="before_main_table"} 
+        {define_slot name="main_table"}
+	        <div class="content-wrapper {if $smarty.get.iframe == 1 || $smarty.get.load_ajax == 1}iframe{/if}" >
+	            <!-- Content Header (Page header) -->
+	            {*
+	            <section class="content-header">
+	                <h1>
+				        Dashboard
+				        <small>Control panel</small>
+				      </h1>
+	                <ol class="breadcrumb">
+	                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+	                    <li class="active">Dashboard</li>
+	                </ol>
+	            </section>
+	            *}
+	            <section class="content">
+{* 	                <div class="box box-default">
+	                    <div class="box-body" id="main_column"> *}
+	                        {block name="before_main_column"} 
+	                        {define_slot name="main_column"} 
+	                        	{if_allowed permission="find" table=$ENV.table } 
+	                        		{if $ENV.prefs.show_search} 
+	                        			{if $smarty.get.iframe != 1 && $smarty.get.load_ajax != 1}
+		                        			{block name="before_search"} 
+
+		                        			{define_slot name="search_form"}
+						                        <div class="search_form" id="top-search-form">
+						                            <form method="GET" action="{$smarty.server.HOST_URI}{$ENV.DATAFACE_SITE_HREF}">
+						                                {form_context exclude="-action,-skip,-submit,-mode"}
+						                                <input class="xf-search-field form-control" style="width:auto; display: inline-block;" type="text" name="-search" value="{$ENV.search|escape}" /> {actions category="find_actions" var="find_actions"} 
+						                                {if $find_actions|@count > 1}
+							                                <select name="-action">
+							                                    {foreach from=$find_actions item="find_action"} {assign var=option_label value=$find_action.label} {if !$option_label} {assign var=option_label value=$ENV.table_object->getLabel()} {/if} {assign var=option_value value=$find_action.action} {if !$option_value} {assign var=option_value value=$find_action.name} {/if}
+							                                    <option value="{$option_value|escape}">{$option_label|escape}</option>
+							                                    {/foreach}
+							                                </select>
+						                                {else} {foreach from=$find_actions item="find_action"} {assign var=option_value value=$find_action.action} {if !$option_value} {assign var=option_value value=$find_action.name} {/if}
+						                                <input type="hidden" name="-action" value="{$option_value|escape}" /> {/foreach} {/if}
+						                                
+						                                	<input class="xf-search-button btn btn-primary" style="vertical-align: top;" type="submit" name="-submit" value='{translate id="main.search.button.label" tableObj=$ENV.table_object}Search {$ENV.table_object->getLabel()|escape}{/translate}' id="search_submit_button" />
+						                                	<a class="xf-show-advanced-find collapsed">
+																<span class="collapsed" style="cursor:pointer">{translate id="templates.G2.advanced_search.label" }Advanced Search{/translate}</span>
+																{* <span class="expanded">{translate id="templates.G2.hide_advanced_search.label"}Hide Advanced Search{/translate}</span> *}
+															</a> 
+														
+														{block name="after_search_form_submit"}
+						                            </form>
+						                        </div>
+					                        {/define_slot} 
+					                        {block name="after_search"} 
+					                    {/if}
+				                    {/if} 
+				                {/if_allowed} 
+				            	{if $back and !$ENV.APPLICATION.hide_back}
+			                        <div class="browser_nav_bar">
+			                            <a href="{$back.link}" title="{translate id=" scripts.GLOBAL.LABEL_BACK "}Back{/translate}">&lt;&lt; {translate id="scripts.GLOBAL.LABEL_GO_BACK"}Go Back{/translate}</a>
+			                        </div>
+		                        {/if}
+		                        <div class="horizontalDivider">&nbsp;</div>
+		                        {define_slot name="xataface_notice_messages"} 
+		                        	{if $ENV.APPLICATION_OBJECT->numMessages() > 0 }
+		                        		{block name="before_message"}
+				                        <div class="portalMessage">
+				                            <ul>
+				                                {block name="message"} 
+				                                {foreach from=$ENV.APPLICATION_OBJECT->getMessages() item="msg"}
+				                                	<li>{$msg|nl2br}</li>
+				                                {/foreach}
+				                            </ul>
+				                        </div>
+	                        			{block name="after_message"} 
+	                        		{/if} 
+	                        	{/define_slot} 
+	                        	{define_slot name="xataface_error_messages"}
+	                        		{if $ENV.APPLICATION_OBJECT->numErrors() > 0 }
+		                        		{block name="before_errors"}
+				                        <div class="portalMessage">
+				                            <h5>{translate id="scripts.GLOBAL.HEADING_ERRORS"}Errors{/translate}</h5>
+				                            <ul>
+				                                {block name="error"} {foreach from=$ENV.APPLICATION_OBJECT->getErrors() item="error"}
+				                                <li>{$error->getMessage()|nl2br}</li>
+				                                {/foreach}
+				                            </ul>
+				                        </div>
+				                        {block name="after_errors"} 
+			                        {/if} 
+			                    {/define_slot}
+		                        <div class="documentContent mainArea" id="region-content">
+		                            {block name="before_main_section"} 
+		                            {define_slot name="main_section"}
+			                            <div style="clear:both">
+			                                {block name="before_record_content"} 
+			                                {define_slot name="record_content"}
+			                                	{$body}
+			                                {/define_slot}
+			                                {block name="after_record_content"}
+			                            </div>
+		                            {/define_slot}
+		                            <!-- main_section-->
+		                            {block name="after_main_section"}
+		                        </div>
+	                    	{/define_slot}
+	                        <!-- main_column-->
+{* 	                    </div>
+	                </div> *}
+	            </section>
+	        </div>
+    	{* </div> *}
+    	{/define_slot}
+    <!--main_table-->
+    {if $smarty.get.iframe != 1 && $smarty.get.load_ajax != 1}
+	    <footer class="main-footer">
+		    {define_slot name="fineprint"} 
+		    	{block name="before_fineprint"} 
+		    		{include file="Dataface_Fineprint.html"} 
+		    	{block name="after_fineprint"} 
+		    {/define_slot} 
+		    {block name="before_global_footer"} 
+		    {define_slot name="global_footer"}
+		    	{include file="global_footer.html"}
+		    {/define_slot} 
+		    {block name="after_global_footer"} 
+		</footer>
+	{/if}
+{/define_slot}
+{if $smarty.get.load_ajax != 1}  
+    <!-- html_body -->
+    {block name="javascript_tool_includes"}
+    <!-- jQuery 3 -->
+    <script>
+    	{literal}
+    	//jQuery.noConflict();
+ 
+		(function( $ ) {
+    		$.widget.bridge('uibutton', $.ui.button);
+    		$.browser={'msie':0};
+    		
+    		
+    	})(jQuery);
+    	{/literal}
+    </script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Morris.js charts -->
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/raphael/raphael.min.js"></script>
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/morris.js/morris.min.js"></script>
+    <!-- Sparkline -->
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <!-- jvectormap -->
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/moment/min/moment.min.js"></script>
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- datepicker -->
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    {* <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/dist/js/pages/dashboard.js"></script> *}
+    <!-- AdminLTE for demo purposes -->
+    {* <script src="{$ENV.DATAFACE_SITE_URL}/themes/adminlte/dist/js/demo.js"></script> *}
+</body>
+
+</html>
+{/if}

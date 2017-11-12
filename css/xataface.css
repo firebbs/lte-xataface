@@ -1,0 +1,435 @@
+/*.selectedActionsMenu li{
+      list-style-type: none;
+    display:inline;
+}*/
+body {background: #ECF0F5}
+.row-actions-cell {
+      padding: 3px 5px 0px 5px !important;
+}
+.main-header:after{ clear: both;content: " ";}
+
+header {max-height: auto !important;}
+.main-header .navbar .dropdown-menu li a {
+  color: #777 !important;
+}
+header .pull-left .navbar-custom-menu ,.navbar-nav,.navbar-nav li {float:left !important;}
+.logo-lg {background0image: url(../images/xataface-logo.png); background-size: contain;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+  }
+.logo-mini {background-image: url(../images/small-xataface-logo.png);  width: 50px; height: 50px;
+background-size: contain;
+
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    }
+.xf-change-limit-dialog {position: absolute;}
+table.listing > tbody > tr > td > div.full-text, table.listing > tbody > tr > td > a.listing-show-less-button {
+    display: none;
+}
+table.listing > tbody > tr > td.expanded > a.listing-show-more-button {
+  display: none;
+}
+table.listing > tbody > tr > td.expanded > div.full-text, table.listing > tbody > tr > td.expanded > a.listing-show-less-button {
+  display: inline;
+}
+
+table.listing > tbody > tr > td > a.listing-show-more-button, table.listing > tbody > tr > td > a.listing-show-less-button {
+    border: 1px solid;
+    border-radius: 3px;
+    padding: 0 2px;
+}
+
+/*.result-stats,*/
+.details-controller {padding-right: 10px;text-align: center;}
+.Dataface_GlanceList {padding-left:0;}
+.resultlist-filters h3 {
+  font-size: 20px;
+}
+.resultlist-filters li {
+  display: inline;
+  padding-right:10px;
+}
+#selected-actions {
+    display: none;
+}
+.ui-dialog { z-index: 9000 !important ;}
+
+body.hide-button-bars .content-wrapper {
+  margin-left:0 !important;
+}
+body.hide-button-bars footer {
+  display: none;
+}
+
+.next-link, .prev-link, .jump-menu, .next-link a, .prev-link a {
+  float: left;
+   color: #436976;
+  font-weight: bold;
+  padding-left: 0.5em;
+  white-space: nowrap;
+}
+
+.xf-button-bar {
+	margin:0 !important;
+}
+.main-sidebar .movable {padding:5px; overflow: hidden;}
+
+.main-sidebar .movable h3.movable-handle {
+  color:#fff; 
+}
+
+.main-sidebar .movable h3.movable-handle a {
+  font-size:14px; 
+  display:block;
+}
+
+
+.box-header.movable-handle {
+	padding-left:20px !important;
+}
+.sidebar {overflow: hidden;}
+
+
+.Dataface_GlanceList-item-actions, .Dataface_GlanceList-oneLineDescription-posted-by {
+    display: none;
+}
+
+.glance_row {
+    padding: 3px;
+    width: 100%;
+    border: 1px solid silver;
+}
+
+li.Dataface_GlanceList-item {
+    list-style-type: none;
+    list-style-image: none;
+    color: #666;
+    border-bottom: 1px dotted #ddd;
+}
+
+
+li.Dataface_GlanceList-item {
+    list-style-type: none;
+    list-style-image: none;
+    color: #666;
+    border-bottom: 1px dotted #ddd;
+}
+
+.glance_row .glance_cell {
+    min-width: 19%;
+    display: inline-block;
+    padding-right: 10px;
+}
+
+.limit-field {display: none;}
+
+
+table.listing,.table {
+  background: #fff;
+}
+table.listing, .table {
+border-collapse: collapse !important;
+}
+/*table.listing td,.table td,
+table.listing th, .table th {
+background-color: #fff !important;
+}*/
+table.listing th, .table-bordered th,
+table.listing td, .table-bordered td {
+border: 1px solid #ddd !important;
+}
+
+
+table.listing,.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+table.listing > thead > tr > th,
+table.listing > tbody > tr > th,
+table.listing > tfoot > tr > th,
+table.listing > thead > tr > td,
+table.listing > tbody > tr > td,
+table.listing > tfoot > tr > td,
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+table.listing > thead > tr > th, .table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+}
+
+table.listing > caption + thead > tr:first-child > th,
+table.listing > colgroup + thead > tr:first-child > th,
+table.listing > thead:first-child > tr:first-child > th,
+table.listing > caption + thead > tr:first-child > td,
+table.listing > colgroup + thead > tr:first-child > td,
+table.listing > thead:first-child > tr:first-child > td,
+
+.table > caption + thead > tr:first-child > th,
+.table > colgroup + thead > tr:first-child > th,
+.table > thead:first-child > tr:first-child > th,
+.table > caption + thead > tr:first-child > td,
+.table > colgroup + thead > tr:first-child > td,
+.table > thead:first-child > tr:first-child > td {
+  border-top: 0;
+}
+table.listing > tbody + tbody, .table > tbody + tbody {
+  border-top: 2px solid #ddd;
+}
+
+
+
+.content-wrapper.iframe {margin-left:0 !important}
+
+
+
+/*BUTTONS BOOTSTRAP COPY*/
+
+.row-actions a {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.row-actions a:focus,
+.row-actions a:active:focus,
+.row-actions a.active:focus,
+.row-actions a.focus,
+.row-actions a:active.focus,
+.row-actions a.active.focus {
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.row-actions a:hover,
+.row-actions a:focus,
+.row-actions a.focus {
+  color: #333;
+  text-decoration: none;
+}
+.row-actions a:active,
+.row-actions a.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+.row-actions a.disabled,
+.row-actions a[disabled],
+fieldset[disabled] .row-actions a {
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  opacity: .65;
+}
+a.row-actions a.disabled,
+fieldset[disabled] a.row-actions a {
+  pointer-events: none;
+}
+.row-actions a {
+  color: #333;
+  background-color: #f1f1f1;
+  border-color: #ccc;
+}
+.row-actions a:focus,
+.row-actions a.focus {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #8c8c8c;
+}
+.row-actions a:hover {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.row-actions a:active,
+.row-actions a.active,
+.open > .dropdown-toggle.row-actions a {
+  color: #333;
+  background-color: #e6e6e6;
+  border-color: #adadad;
+}
+.row-actions a:active:hover,
+.row-actions a.active:hover,
+.open > .dropdown-toggle.row-actions a:hover,
+.row-actions a:active:focus,
+.row-actions a.active:focus,
+.open > .dropdown-toggle.row-actions a:focus,
+.row-actions a:active.focus,
+.row-actions a.active.focus,
+.open > .dropdown-toggle.row-actions a.focus {
+  color: #333;
+  background-color: #d4d4d4;
+  border-color: #8c8c8c;
+}
+.row-actions a:active,
+.row-actions a.active,
+.open > .dropdown-toggle.row-actions a {
+  background-image: none;
+}
+.row-actions a.disabled:hover,
+.row-actions a[disabled]:hover,
+fieldset[disabled] .row-actions a:hover,
+.row-actions a.disabled:focus,
+.row-actions a[disabled]:focus,
+fieldset[disabled] .row-actions a:focus,
+.row-actions a.disabled.focus,
+.row-actions a[disabled].focus,
+fieldset[disabled] .row-actions a.focus {
+  background-color: #fff;
+  border-color: #ccc;
+}
+.row-actions a .badge {
+  color: #fff;
+  background-color: #333;
+}
+
+.row-actions a {
+  padding: 2px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+
+
+
+/* ------------------------------- TABLES (bootstrap copy)*/
+
+table.listing > tbody > tr.even {
+  background-color: #f9f9f9;
+}
+
+table.listing > tbody > tr:hover {
+  background-color: #f5f5f5;
+}
+
+table.listing > tbody > tr > td.active:hover,
+table.listing > tbody > tr > th.active:hover,
+table.listing > tbody > tr.active:hover > td,
+table.listing > tbody > tr:hover > .active,
+table.listing > tbody > tr.active:hover > th {
+  background-color: #e8e8e8;
+}
+
+
+
+table.listing > thead > tr > th,
+table.listing > tbody > tr > th,
+table.listing > tfoot > tr > th,
+table.listing > thead > tr > td,
+table.listing > tbody > tr > td,
+table.listing > tfoot > tr > td,
+ {
+  border: 1px solid #ddd;
+}
+
+table.listing > thead > tr > td.active,
+table.listing > tbody > tr > td.active,
+table.listing > tfoot > tr > td.active,
+table.listing > thead > tr > th.active,
+table.listing > tbody > tr > th.active,
+table.listing > tfoot > tr > th.active,
+table.listing > thead > tr.active > td,
+table.listing > tbody > tr.active > td,
+table.listing > tfoot > tr.active > td,
+table.listing > thead > tr.active > th,
+table.listing > tbody > tr.active > th,
+table.listing > tfoot > tr.active > th,
+.table > thead > tr > td.active,
+.table > tbody > tr > td.active,
+.table > tfoot > tr > td.active,
+.table > thead > tr > th.active,
+.table > tbody > tr > th.active,
+.table > tfoot > tr > th.active,
+.table > thead > tr.active > td,
+.table > tbody > tr.active > td,
+.table > tfoot > tr.active > td,
+.table > thead > tr.active > th,
+.table > tbody > tr.active > th,
+.table > tfoot > tr.active > th {
+  background-color: #f5f5f5;
+}
+
+
+table.listing > thead > tr > td.success,
+table.listing > tbody > tr > td.success,
+table.listing > tfoot > tr > td.success,
+table.listing > thead > tr > th.success,
+table.listing > tbody > tr > th.success,
+table.listing > tfoot > tr > th.success,
+table.listing > thead > tr.success > td,
+table.listing > tbody > tr.success > td,
+table.listing > tfoot > tr.success > td,
+table.listing > thead > tr.success > th,
+table.listing > tbody > tr.success > th,
+table.listing > tfoot > tr.success > th, 
+.table > thead > tr > td.success,
+.table > tbody > tr > td.success,
+.table > tfoot > tr > td.success,
+.table > thead > tr > th.success,
+.table > tbody > tr > th.success,
+.table > tfoot > tr > th.success,
+.table > thead > tr.success > td,
+.table > tbody > tr.success > td,
+.table > tfoot > tr.success > td,
+.table > thead > tr.success > th,
+.table > tbody > tr.success > th,
+.table > tfoot > tr.success > th {
+  background-color: #dff0d8;
+}
+
+
+table.listing > thead > tr > td.info,
+table.listing > tbody > tr > td.info,
+table.listing > tfoot > tr > td.info,
+table.listing > thead > tr > th.info,
+table.listing > tbody > tr > th.info,
+table.listing > tfoot > tr > th.info,
+table.listing > thead > tr.info > td,
+table.listing > tbody > tr.info > td,
+table.listing > tfoot > tr.info > td,
+table.listing > thead > tr.info > th,
+table.listing > tbody > tr.info > th,
+table.listing > tfoot > tr.info > th,
+.table > thead > tr > td.info,
+.table > tbody > tr > td.info,
+.table > tfoot > tr > td.info,
+.table > thead > tr > th.info,
+.table > tbody > tr > th.info,
+.table > tfoot > tr > th.info,
+.table > thead > tr.info > td,
+.table > tbody > tr.info > td,
+.table > tfoot > tr.info > td,
+.table > thead > tr.info > th,
+.table > tbody > tr.info > th,
+.table > tfoot > tr.info > th {
+  background-color: #d9edf7;
+}
