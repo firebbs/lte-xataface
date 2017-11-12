@@ -11,10 +11,12 @@ Theme for xataface based on AdminLTE ( https://github.com/almasaeed2010/AdminLTE
 ```
 
 
-You can add fontawesome icons ( http://fontawesome.io/icons/ ) to your menu. Add this new section to your conf.ini:
+You can add fontawesome icons ( http://fontawesome.io/icons/ ) to your tables menu. Add this new section to your conf.ini:
+```
 [_icons]
-payment="fa-money"
-links="fa-link"
-menu="fa-navicon"
+table1="fa-money"
+table2="fa-link"
+table3="fa-navicon"
+```
 
 To load page without headers,left menu etc. you can add "load_ajax=1" or "iframe=1" GET paramaters to URL. Example: http://your_domain/admin/index.php?-table=user&iframe=1
