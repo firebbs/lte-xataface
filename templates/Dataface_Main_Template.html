@@ -306,12 +306,12 @@
 		                        	{if $ENV.APPLICATION_OBJECT->numMessages() > 0 }
 		                        		{block name="before_message"}
 				                        <div class="portalMessage">
-				                            <ul>
+				                            
 				                                {block name="message"} 
 				                                {foreach from=$ENV.APPLICATION_OBJECT->getMessages() item="msg"}
-				                                	<li>{$msg|nl2br}</li>
+				                                	<h3><span class="label label-warning">{$msg|nl2br}</span></h3>
 				                                {/foreach}
-				                            </ul>
+				                            
 				                        </div>
 	                        			{block name="after_message"} 
 	                        		{/if} 
